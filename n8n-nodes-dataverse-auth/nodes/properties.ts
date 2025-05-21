@@ -1,4 +1,3 @@
-
 export enum Properties {
     //GET
     GET_QUERY = "GET_QUERY",
@@ -27,4 +26,7 @@ export enum Properties {
   
     TYPE = "TYPE",
     OPERATION = "OPERATION",
-  }
+
+    //DELETE
+    DELETE_RECORDID = "delete_recordid",
+}

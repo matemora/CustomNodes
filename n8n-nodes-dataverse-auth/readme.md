@@ -119,6 +119,11 @@ The Dataverse node offers several operations, each with specific parameters:
 *   **Type:** Column.
 *   **Columns (for COLUMN type):** Specify the columns and their values.
 
+### Delete Record (DELETE)
+
+*   **Entity Name:** Select the entity (table) from which to delete the record.
+*   **Record ID:** Provide the ID of the record to be deleted.
+
 ### Get Lookup from Option Set Definitions (OPTIONSET)
 
 

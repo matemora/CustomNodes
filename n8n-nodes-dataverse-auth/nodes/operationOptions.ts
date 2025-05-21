@@ -37,6 +37,11 @@ export const operationOptions : INodeProperties = {
       value: Operation.ENTITY,
       action: "Retrieve lookup data from table",
     },
+    {
+      name: "Delete record",
+      value: Operation.DELETE,
+      action: "Delete record",
+    },
   ],
   default: Operation.GET,
 };

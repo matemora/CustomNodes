@@ -233,6 +233,29 @@ export class dataverseAuth implements ICredentialType {
         }
     }
     
+    async DeleteRecord(entityName: string, recordId: string): Promise<void> {
+        await this.ensureAuthenticated();
+        if (!this.axiosInstance) throw new Error('Axios instance not available');
+
+        const modifiedEntityLogicalName = this.modifyEntityLogicalName(entityName);
+        const fullApiUrl = `/api/data/v9.2/${modifiedEntityLogicalName}(${recordId})`;
+        
+        const headers = {
+            "OData-MaxVersion": "4.0",
+            "Accept": "application/json",
+            "Prefer": "odata.include-annotations=*",
+        };
+
+        try {
+            await this.axiosInstance.delete(fullApiUrl, { headers });
+        } catch (error: any) {
+            throw new Error(
+                `Dataverse API error: ${error.response?.status} - ${error.response?.statusText}. Details: ${JSON.stringify(
+                    error.response?.data
+                )}`
+            );
+        }
+    }
 
     async ListEntityColumns(entityName: string): Promise<{ columns: any[] }> {
         await this.ensureAuthenticated();

@@ -106,9 +106,6 @@ export class Dataverse implements INodeType {
     },
   };
 
-
-  
-
   async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> 
   {
     const items = this.getInputData();
@@ -146,6 +143,9 @@ export class Dataverse implements INodeType {
           case Operation.POST:
             columnsData = await handlePostOperation(this,columnsData, itemIndex, entityName, patch_data);
             break;
+          case Operation.DELETE:
+            await handleDeleteOperation(this, entityName, itemIndex);
+            break;
           case Operation.OPTIONSET:
             query = await handleOptionSetOperation(query, optionset_entityname, optionset_attributename, itemIndex);
             break;
@@ -176,6 +176,18 @@ export class Dataverse implements INodeType {
       }
     }
     return this.prepareOutputData(returnData);
+
+    async function handleDeleteOperation(func:IExecuteFunctions, entityName: string, itemIndex: number) {
+      const recordId = func.getNodeParameter(Properties.DELETE_RECORDID, itemIndex) as string;
+      await auth.DeleteRecord(entityName, recordId);
+      returnData.push({
+        json: {
+          success: true,
+          message: `Record ${recordId} deleted successfully from ${entityName}`,
+        },
+        pairedItem: itemIndex,
+      });
+    }
 
     async function handleEntityOperation(entityname: string, entity_id: string, entity_name: string, entityName: string, itemIndex: number) {
       const modifiedEntityLogicalName = auth.modifyEntityLogicalName(entityname);
