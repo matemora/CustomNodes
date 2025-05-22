@@ -121,6 +121,8 @@ The Dataverse node offers several operations, each with specific parameters:
 
 ### Delete Record (DELETE)
 
+![alt text](./nodes/resources/image-14.png)
+
 *   **Entity Name:** Select the entity (table) from which to delete the record.
 *   **Record ID:** Provide the ID of the record to be deleted.
 
