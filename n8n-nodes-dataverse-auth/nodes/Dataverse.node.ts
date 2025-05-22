@@ -20,6 +20,7 @@ import { globaloptionsetOperations } from "./globaloptionsetOperations";
 import { entityLookupOperations } from "./entityLookupOperations";
 import { Properties } from "./properties";
 import { OperationType } from "./operationType";
+import { deleteOperations } from "./deleteOperations";
 
 export class Dataverse implements INodeType {
   description: INodeTypeDescription = {
@@ -49,7 +50,8 @@ export class Dataverse implements INodeType {
       ...postOperations,
       ...optionsetOperations,
       ...globaloptionsetOperations,
-	    ...entityLookupOperations
+	    ...entityLookupOperations,
+      ...deleteOperations
     ],
   };
 
